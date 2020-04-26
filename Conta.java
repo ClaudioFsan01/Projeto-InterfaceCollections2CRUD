@@ -4,6 +4,7 @@ public class Conta {
 	protected int numero;
 	private String nome;		
 	protected double saldo;
+	protected String endereco;
 	
 	public void setNumero(int numero) {
 		if(numero<0) {
@@ -32,6 +33,21 @@ public class Conta {
 	public String getNome() {
 		return this.nome;
 	}
+	
+	public void setEndereco(String endereco) {
+		if(endereco != " " && endereco != null) {
+			this.endereco = endereco;
+		}
+		else {
+			System.out.println(" Inserir um endereço valido !");
+		}
+		
+	}
+	
+	public String getEndereco() {
+		return this.endereco;
+	}
+	
 	
 	public double getSaldo() {
 		return this.saldo;

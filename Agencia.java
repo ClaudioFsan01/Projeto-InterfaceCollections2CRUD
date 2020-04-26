@@ -108,4 +108,21 @@ public class Agencia {
 		
 	}
 	
+	
+	// atualizar endereço da conta
+	
+	
+	public boolean atualzarEndereco(int numeroConta, String endereco) {
+		
+		for(Conta conta : contas) {
+			if(conta.numero == numeroConta) {
+				conta.setEndereco(endereco);
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
+	
 }
