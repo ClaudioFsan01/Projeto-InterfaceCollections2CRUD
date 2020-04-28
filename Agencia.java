@@ -43,7 +43,7 @@ public class Agencia {
 	}
 	*/
 	public List<Conta> retornaListaContas(){
-		
+		tratarListaVazia();
 		return contas;  // retonra a lista de conta corrente
 	}
 	
@@ -54,6 +54,7 @@ public class Agencia {
 	
 	public Conta pesquisarContaPeloNumero(int numero) {
 		
+		tratarListaVazia();
 		
 		for(Conta conta : contas) {// percorrendo cada item da lista contas e atribuindo cada objeto a variavel conta  // forEch em java
 			if(conta.numero == numero) { // verificando se o numero da conta de cada objeto acessado na lista contas é igual ao numero passado no parametro
@@ -74,11 +75,17 @@ public class Agencia {
 	// remover uma conta da lista
 	
 	public void removerConta(int index ) {
+		tratarListaVazia();
 		
-		contas.remove(index);	
+		  if(contas.remove(index) !=null) {
+			  System.out.println(" Elemento removido com sucesso !");
+		  }else {
+			  System.out.println(" Elemento não foi removido com sucesso !");
+		  }
 	}
 	
 	public boolean removerContaPeloNumero(int numero) {
+		tratarListaVazia();
 		
 		for(Conta conta : contas) { // percorrendo cada item da lista contas e atribuindo cada objeto a variavel conta  // forEch em java
 			
@@ -96,7 +103,7 @@ public class Agencia {
 	
 	// alterar contas na lista 
 	
-	public void alterarContas(int numeroContaAntiga, Conta nova) {
+	/*public void alterarContas(int numeroContaAntiga, Conta nova) {
 		
 		if(removerContaPeloNumero(numeroContaAntiga)) {
 			System.out.println("Conta antiga removida com sucesso ! \n");
@@ -106,13 +113,14 @@ public class Agencia {
 		
 		inserirConta(nova);
 		
-	}
+	}*/
 	
 	
 	// atualizar endereço da conta
 	
 	
-	public boolean atualzarEndereco(int numeroConta, String endereco) {
+	public boolean atualizarEndereco(int numeroConta, String endereco) {
+		tratarListaVazia();
 		
 		for(Conta conta : contas) {
 			if(conta.numero == numeroConta) {
@@ -123,6 +131,14 @@ public class Agencia {
 		}
 		
 		return false;
+	}
+	
+	
+	public void tratarListaVazia() { // verifica se a lista está vazia caso sim lança a exceção de ponteiro nulo
+		if(contas == null) {
+			throw new NullPointerException(" Lista vazia ! \n"); 
+		}
+		
 	}
 	
 }

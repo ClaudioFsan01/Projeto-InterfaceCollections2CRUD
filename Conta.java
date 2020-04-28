@@ -37,10 +37,12 @@ public class Conta {
 	public void setEndereco(String endereco) {
 		if(endereco != " " && endereco != null) {
 			this.endereco = endereco;
+			System.out.println(" Endereço inserido com sucesso !");
+			
 		}
 		else {
 			System.out.println(" Inserir um endereço valido !");
-		}
+			}	
 		
 	}
 	
