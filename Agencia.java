@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Agencia {
 	/*
-	Também declaramos atributos como List em vez de nos comprometer como uma ou outra
+	Também declaramos atributos como List em vez de nos comprometer com uma ou outra
 	implementação. Dessa forma obtemos um baixo acoplamento: podemos trocar a implementação, já que
 	estamos programando para a interface! Por exemplo: */
    /*
@@ -12,7 +12,7 @@ public class Agencia {
 	private List<ContaPoupanca> constasPoupancas;
 	*/
 	
-	private List<Conta> contas;
+	private List<Conta> contas = new ArrayList<>(); // criando a lista de conta corrente ou poupança
 	
 	/*
 	 É boa prática trabalhar com a interface em todos os lugares possíveis:
@@ -21,10 +21,9 @@ public class Agencia {
 	 */
 	
 	// tanto a classe ArrayList quanto a LinkedList implementam a interface List
-	
+
 	public void inserirConta(Conta conta) {
-		contas = new ArrayList<>(); // criando a lista de conta corrente ou poupança
-		
+			
 		if(contas.add(conta)==true) {
 			System.out.println(" Conta inserida com sucesso ! \n");
 		}else {
@@ -43,7 +42,7 @@ public class Agencia {
 	}
 	*/
 	public List<Conta> retornaListaContas(){
-		tratarListaVazia();
+		tratarListaVazia(); // verifica se a lista está vazia no caso de contas igual a nulo
 		return contas;  // retonra a lista de conta corrente
 	}
 	
@@ -51,22 +50,6 @@ public class Agencia {
 	public List<ContaPoupanca> retornaListaContaPoupanca(){
 		return constasPoupancas;  // retonra a lista de conta poupanças
 	}*/
-	
-	public Conta pesquisarContaPeloNumero(int numero) {
-		
-		tratarListaVazia();
-		
-		for(Conta conta : contas) {// percorrendo cada item da lista contas e atribuindo cada objeto a variavel conta  // forEch em java
-			if(conta.numero == numero) { // verificando se o numero da conta de cada objeto acessado na lista contas é igual ao numero passado no parametro
-				
-				return conta;// caso possua na lista uma conta com o numero igual passado no parametro essa conta sera retornada
-			}		
-			
-		}		
-		
-		return null;	// caso não possua uma conta com o numero igual ao pesquisado	
-		
-	}
 	
 	// pesquisar conta pelo index
 	
@@ -87,14 +70,13 @@ public class Agencia {
 	public boolean removerContaPeloNumero(int numero) {
 		tratarListaVazia();
 		
-		for(Conta conta : contas) { // percorrendo cada item da lista contas e atribuindo cada objeto a variavel conta  // forEch em java
+		Conta conta = pesquisarContaPeloNumero(numero);			
 			
-			if(conta.numero == numero) { // verificando se o numero da conta de cada objeto acessado é igual ao numero passado no parametro
-				contas.remove(conta); // se o numero da conta do objeto acessado for igual ao numero passado no parametro 
-				// o objeto em questao será removido da lista
-				return true;
-			}
-		}
+		      if(conta != null) {
+		    	  contas.remove(conta); // se o numero da conta do objeto acessado for igual ao numero passado no parametro 
+					// o objeto em questao será removido da lista
+					return true;		    	  
+		      }	
 		
 		return false;		
 		
@@ -120,18 +102,38 @@ public class Agencia {
 	
 	
 	public boolean atualizarEndereco(int numeroConta, String endereco) {
+		  
 		tratarListaVazia();
 		
-		for(Conta conta : contas) {
-			if(conta.numero == numeroConta) {
-				conta.setEndereco(endereco);
-				return true;
-			}
-			
-		}
+		Conta conta = pesquisarContaPeloNumero(numeroConta);
+		 
+		 if(conta != null) {
+			 conta.setEndereco(endereco);
+			 return true;
+		 }		
 		
 		return false;
 	}
+	
+	
+   public Conta pesquisarContaPeloNumero(int numero) {
+		
+		tratarListaVazia();		
+		
+		
+		for(Conta conta : contas) {// percorrendo cada item da lista contas e atribuindo cada objeto a variavel conta  // forEch em java
+			if(conta.numero == numero) { // verificando se o numero da conta de cada objeto acessado na lista contas é igual ao numero passado no parametro
+				
+				return conta;// caso possua na lista uma conta com o numero igual passado no parametro essa conta sera retornada
+			}		
+			
+		}		
+		
+		return null;	// caso não possua uma conta com o numero igual ao pesquisado	
+		
+	}
+	
+	
 	
 	
 	public void tratarListaVazia() { // verifica se a lista está vazia caso sim lança a exceção de ponteiro nulo
@@ -140,5 +142,7 @@ public class Agencia {
 		}
 		
 	}
+	
+	
 	
 }

@@ -1,5 +1,6 @@
 
-public class Conta {
+public abstract class Conta { // Classe Conta abstrata pois ela não pode ser instanciada pois não existe conta generica somente conta poupança e corrente
+	 // quem for instanciar uma conta , obrigatoriamente deve instanciar a ContaCorrente ou ContaPoupança
 	
 	protected int numero;
 	private String nome;		
@@ -54,7 +55,22 @@ public class Conta {
 	public double getSaldo() {
 		return this.saldo;
 	}
-     
+	
+	/* Inserindo aqui o métodos abstratos deposita(double valor),  saca(double valor)
+	  Isso faz com que as classes filhas  ContaCorrente e ContaPoupança obrigatoriamente reescrevam esses métodos cada uma com as 
+	  suas peculiaridades. 
+	  Nesse contexto não me foi conveniente criar uma interface que implemente esses metodos pois quero que uma referencia 
+	  do tipo Conta acesse esses métodos que serão reecritos nas classes filhas ContaCorrente e ContaPoupança.
+	  E tambem não me foi conveniente declarar essa classe Conta sendo do tipo interface pois quero que as classes filhas herdem sem ter que 
+	  implementar os métodos acima pois em uma interface não se implementa o corpo (o que o método faz ou como faz uma determinada execução).
+	  
+	  Existe um recurso em Java que, em uma classe abstrata, podemos escrever que determinado método.
+    será sempre escrito pelas classes filhas. Isto é, um método abstrato.
+   Ele indica que todas as classes filhas (concretas, isto é, que não forem abstratas) devem reescrever
+   esse método ou não compilarão. É como se você herdasse a responsabilidade de ter aquele método.*/
+	
+	public abstract void deposita(double valor);
+	public abstract void saca(double valor);
 	
 
 }

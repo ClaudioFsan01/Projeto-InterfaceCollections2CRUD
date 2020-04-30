@@ -1,14 +1,15 @@
 
-public class ContaPoupanca extends Conta implements Transacao {
+public class ContaPoupanca extends Conta {
 		
 
 	public void deposita(double valor)
 	{
 		if(valor<0) {
-			throw new IllegalArgumentException(" Voce tentou depositar um valor negativo na conta poupança !");
+			throw new IllegalArgumentException(" Voce tentou depositar um valor invalido na conta poupança !");
 			
 		}else {
 			this.saldo += valor;
+			System.out.println(" Deposito efetuado com sucesso na conta poupança no valor de : "+ valor);
 		}
 		
 		
@@ -34,6 +35,7 @@ obrigando o outro método que vá utilizar deste de se preocupar com essa exceção 
 		else
 		{
 			this.saldo -= valor;
+			System.out.println(" Saque efetuado com sucesso na conta poupança no valor de : "+ valor);
 			
 		}
 		 

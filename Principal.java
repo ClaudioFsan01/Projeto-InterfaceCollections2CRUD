@@ -75,15 +75,40 @@ public class Principal {
 				 }
 				 break;
 				 
+			 case 8:
+				 try {
+					 realizarDeposito(sc, conta, ag);
+				 }catch(IllegalArgumentException e) {
+					 System.out.println(" \n"+ e.getMessage());	
+				 }
+				
+				 break;
+				 
+			 case 9:
+				 try {
+					 realizarSaque(sc, conta, ag);
+				 }catch(SaldoInsuficienteException e) {
+					 System.out.println(" \n"+ e.getMessage());	
+					 System.out.println(" \n"+ e.getMensagem());	 /*Somente no método saca da classe ContaPoupanca
+					   é passado uma String no parametro do construtor  SaldoInsuficienteException. 
+					   Criei um método personalizado getMensagem() para retornar essa mensagem */  
+				 }
+				
+				 break;
+				 
+			 case 10:
+				 System.out.println(" \n Programa encerrado ! \n");
+				 break;
+				 
 				 default:
 					 System.out.println(" \n Opção invalida !");
 					 break;
 		 }			 
 			
 			 
-		 }while(op !=8);
+		 }while(op !=10);
 		 
-		 System.out.println(" \n Programa encerrado !");
+		
 		 
 		 
 		
@@ -103,7 +128,9 @@ public class Principal {
 		  		            +"(5)- Remover Conta: \n"
 		  		            +"(6)- Alterar Conta na lista: \n" 
 		  		            +"(7)- Atualizar Conta : \n"
-		  		            +"(8)- Sair");		  
+		  		            +"(8)- Depositar : \n"
+		  		            +"(9)- Sacar : \n"
+		  		            +"(10)- Sair");		  
 		 op = sc.nextInt();
 		  
 		return op;
@@ -155,8 +182,7 @@ public class Principal {
 		 conta.setEndereco(sc.next());	
 		 
 		 System.out.println("\n Entre com o valor do deposito :");
-		 conta.setEndereco(sc.next());	
-		 
+		 conta.deposita(sc.nextDouble());			 
 		 exibirConta(conta);
 		
 	}
@@ -195,6 +221,39 @@ public class Principal {
 			  System.out.println("\n Conta não foi encontrada ! \n");
 		  }
 	}
+	
+	public static void  realizarDeposito(Scanner sc, Conta conta, Agencia ag) {
+		
+		 System.out.println("\n Entre com o numero da Conta : \n");
+		  conta = ag.pesquisarContaPeloNumero(sc.nextInt());
+		  if(conta != null) {
+			  
+		 System.out.println("\n Entre com o valor do deposito : \n");
+			  conta.deposita(sc.nextDouble());
+		  }else {
+			  System.out.println("\n Conta não encontrada ou inexistente : \n");
+		  }
+		
+		
+	}
+	
+	public static void  realizarSaque(Scanner sc, Conta conta, Agencia ag) {
+		
+		 System.out.println("\n Entre com o numero da Conta : \n");
+		  conta = ag.pesquisarContaPeloNumero(sc.nextInt());
+		  if(conta != null) {
+			  
+		 System.out.println("\n Entre com o valor do saque : \n");
+			  conta.saca(sc.nextDouble()); 
+		  }else {
+			  System.out.println("\n Conta não encontrada ou inexistente : \n");
+		  }
+		
+		
+	}
+	
+	
+	
 	
 	public static void exibirConta(Conta conta) {
 		
