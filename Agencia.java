@@ -1,6 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 
 public class Agencia {
 	/*
@@ -137,8 +137,8 @@ public class Agencia {
 	
 	
 	public void tratarListaVazia() { // verifica se a lista está vazia caso sim lança a exceção de ponteiro nulo
-		if(contas == null) {
-			throw new NullPointerException(" Lista vazia ! \n"); 
+		if(contas.isEmpty()) { //contas.isEmpty() retorna true se a lista não contem elementos
+			throw new NullPointerException(" Lista não possui conta cadastrada ! \n"); 
 		}
 		
 	}

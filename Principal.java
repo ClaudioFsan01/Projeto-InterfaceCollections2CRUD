@@ -20,17 +20,27 @@ public class Principal {
 			 switch(op){
 			 
 			 case 1:
-				  conta = new ContaCorrente();				 
-				 cadastrarConta(conta,sc);
-				 ag.inserirConta(conta);
+				 try {
+					 conta = new ContaCorrente();				 
+					 cadastrarConta(conta,sc);
+					 ag.inserirConta(conta);
+					 
+				 }catch(IllegalArgumentException e) {
+					 System.out.println(" \n"+ e.getMessage());		
+				 }
+				 
 				 
 				 break;
 				 
 			 case 2:
-				 
-				  conta = new ContaPoupanca();				 
-				 cadastrarConta(conta,sc);
-				 ag.inserirConta(conta);
+				 try {
+					 conta = new ContaPoupanca();				 
+					 cadastrarConta(conta,sc);
+					 ag.inserirConta(conta);
+				 }catch(IllegalArgumentException e) {
+					 System.out.println(" \n"+ e.getMessage());		
+				 }
+				  
 				 break;
 				 
 			 case 3:
@@ -80,6 +90,8 @@ public class Principal {
 					 realizarDeposito(sc, conta, ag);
 				 }catch(IllegalArgumentException e) {
 					 System.out.println(" \n"+ e.getMessage());	
+				 }catch(NullPointerException e) {
+					 System.out.println(" \n"+ e.getMessage());	
 				 }
 				
 				 break;
@@ -92,6 +104,8 @@ public class Principal {
 					 System.out.println(" \n"+ e.getMensagem());	 /*Somente no método saca da classe ContaPoupanca
 					   é passado uma String no parametro do construtor  SaldoInsuficienteException. 
 					   Criei um método personalizado getMensagem() para retornar essa mensagem */  
+				 }catch(NullPointerException e) {
+					 System.out.println(" \n"+ e.getMessage());	
 				 }
 				
 				 break;
